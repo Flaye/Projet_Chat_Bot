@@ -13,6 +13,8 @@ GUILD = {id:os.getenv('DISCORD_ID_GUILD')}
 
 client = discord.Client()
 
+print(data_import.geoplaces2.head(10))
+
 @client.event
 async def on_ready():
   #guild = discord.utils.get(client.guilds, id=GUILD)

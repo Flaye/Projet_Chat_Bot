@@ -25,12 +25,13 @@ def NLP(msg):
         if intent['name'] == "find_by_type": #Looking for french food
             try:
                 typefood = extractEntity(nlp, 'TypeFood:TypeFood')
-                all_placeId = chefmozcuisine.index[chefmozcuisine['Rcuisine'].str.lower() == typefood.lower()]
+                all_placeId = chefmozcuisine.loc[chefmozcuisine['Rcuisine'].str.lower().str.contains(typefood.lower())]
                 if(len(all_placeId) != 0):
-                    print(all_placeId)
-                    list_restaurant = geoplaces2.loc[geoplaces2.index.isin(all_placeId)] #Get all rows where id is in list of id :all_placeId
+                    list_restaurant = geoplaces2.loc[geoplaces2["placeID"].isin(all_placeId["placeID"])] #Get all rows where id is in list of id :all_placeId
+                    print(list_restaurant)
                     if(len(list_restaurant)!=0):
-                        list_five = list_restaurant.sample(n = 5)
+                        n = 5 if len(list_restaurant) >= 5 else len(list_restaurant)
+                        list_five = list_restaurant.sample(n)
                         dict_place = []
                         for index, row in list_five.iterrows():
                             val = {'txt':"Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"],row["address"],row["city"],row["price"]), "link":"https://www.google.com/maps/place/{},{}".format(row["latitude"],row["longitude"])}
@@ -43,7 +44,6 @@ def NLP(msg):
         elif intent['name'] == "get_info": #Info for the restaurant <name of restaurant>
             try:
                 restaurant = extractEntity(nlp, 'restaurant:restaurant')
-                print(restaurant)
             except:
                 print("Erreur ligne 45")
                 return [{'txt': "Sorry, something went wrong !", "link": None}]
