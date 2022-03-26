@@ -34,7 +34,7 @@ async def on_message(message):
     # ==== Launch Chat Bot with Hi ====
     if message.content.lower() in hello:
         msg = "Hi ! Welcome to the chatBot of Where could I eat ?\nYou are looking for a restaurant ?\nJust ask : Tell me more about <The name of the restaurant>" \
-              "\nYou know what you would like to eat, but you don't know where ?\nJust ask : I would like to eat <The type of food> (for example: French food !)"
+              "\nYou know what you would like to eat, but you don't know where ?\nJust ask : I would like to eat <The type of food> (for example: French food !) :smiley:"
         await message.channel.send(msg)
     # ==== End Chat Bot first call ====
     elif message.content.lower() == 'test':

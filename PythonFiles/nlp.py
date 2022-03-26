@@ -34,19 +34,19 @@ def NLP(msg):
                         list_five = list_restaurant.sample(n)
                         dict_place = []
                         for index, row in list_five.iterrows():
-                            val = {'txt':"Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"],row["address"],row["city"],row["price"]), "link":"https://www.google.com/maps/place/{},{}".format(row["latitude"],row["longitude"])}
+                            val = {'txt':":fork_knife_plate: Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"],row["address"],row["city"],row["price"]), "link":"https://www.google.com/maps/place/{},{}".format(row["latitude"],row["longitude"])}
                             dict_place.append(val)
                         return dict_place
                 return [{'txt': "Sorry, no restaurant found !", "link":None}]
             except:
                 print("Erreur ligne 39")
-                return [{'txt': "Sorry, something went wrong !", "link": None}]
+                return [{'txt': ":pensive: Sorry, something went wrong !", "link": None}]
         elif intent['name'] == "get_info": #Info for the restaurant <name of restaurant>
             try:
                 restaurant = extractEntity(nlp, 'restaurant:restaurant')
             except:
                 print("Erreur ligne 45")
-                return [{'txt': "Sorry, something went wrong !", "link": None}]
+                return [{'txt': ":pensive: Sorry, something went wrong !", "link": None}]
 
             city = None
             try: #Maybe in a specific city
@@ -63,13 +63,13 @@ def NLP(msg):
             if(len(rest_info) != 0):
                 dict_place = []
                 for index, row in rest_info.iterrows():
-                    val = {'txt': "Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"], row["address"],
+                    val = {'txt': ":fork_knife_plate: Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"], row["address"],
                                                                                         row["city"], row["price"]),
                            "link": "https://www.google.com/maps/place/{},{}".format(row["latitude"],
                                                                                     row["longitude"])}
                     dict_place.append(val)
                 return dict_place
-            return [{'txt': "Sorry, no restaurant found !", "link":None}]
+            return [{'txt': ":pensive: Sorry, no restaurant found !", "link":None}]
 
         elif intent['name'] == "find_by_city": #Give the 5 best restaurant in the city
             city = extractEntity(nlp, "Localisation:City")
@@ -91,15 +91,15 @@ def NLP(msg):
                     list_five = list_restaurant.sample(n=5)
                     dict_place = []
                     for index, row in list_five.iterrows():
-                        val = {'txt': "Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"], row["address"],
+                        val = {'txt': ":fork_knife_plate: Name : {}\nAddress : {}\nCity : {}\nPrice : ".format(row["name"], row["address"],
                                                                                             row["city"], row["price"]),
                                "link": "https://www.google.com/maps/place/{},{}".format(row["latitude"],
                                                                                         row["longitude"])}
                         dict_place.append(val)
                     return dict_place
-                return [{'txt': "Sorry, no restaurant found !", "link": None}]
+                return [{'txt': ":pensive: Sorry, no restaurant found !", "link": None}]
             except:
-                return [{'txt': "Sorry, something went wrong !", "link": None}]
-        return [{'txt': "Could you ask again ?", 'link': None}]
+                return [{'txt': ":pensive: Sorry, something went wrong !", "link": None}]
+        return [{'txt': ":face_with_monocle: Could you ask again ?", 'link': None}]
     else:
-        return [{'txt': "Could you ask again ?", 'link': None}]
+        return [{'txt': ":face_with_monocle: Could you ask again ?", 'link': None}]
