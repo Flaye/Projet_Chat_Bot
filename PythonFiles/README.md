@@ -1,4 +1,4 @@
-# Find Your Restaurant Team 9 - DIA6
+# Find Your Restaurant - DIA4
 
 ## Members
 - Tom PAYET 1
